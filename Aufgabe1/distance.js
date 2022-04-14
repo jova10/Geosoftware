@@ -4,7 +4,7 @@
 "use strict";
 
 // Creating a new 2d Array with Names of the cities and distance
-var citiesDistance = [
+var distanceFromPoint = [
     ["Köln", 0.0],
     ["Amsterdam", 0.0],
     ["Kassel", 0.0],
@@ -40,14 +40,14 @@ for(var i = 0; i < cities.length; i++) {
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
 
     const d = Math.round((R * c / 1000) * 10) / 10; // Converting into kilometres and rounding to one decimal place
-    // Saving the calculated distances in the given array citiesDistance
-    citiesDistance[i][1] = d;
+    // Saving the calculated distances in the given array distanceFromPoint
+    distanceFromPoint[i][1] = d;
 }
 }
 // Running the distance function to calculate the distance 
 distances();
-// Sorting the 2d citiesDistance array. We have to compare the second Column where the distances are saved. Used "https://stackoverflow.com/questions/16096872/how-to-sort-2-dimensional-array-by-column-value".
-citiesDistance.sort(compareSecondColumn);
+// Sorting the 2d distanceFromPoint array. We have to compare the second Column where the distances are saved. Used "https://stackoverflow.com/questions/16096872/how-to-sort-2-dimensional-array-by-column-value".
+distanceFromPoint.sort(compareSecondColumn);
 
 function compareSecondColumn(a, b) {
     if (a[1] === b[1]) {
@@ -57,10 +57,22 @@ function compareSecondColumn(a, b) {
         return (a[1] < b[1]) ? -1 : 1;
     }
 }
-// Textoutput in HTML of the sorted Array cititesDistance with row break
-var result = "";
-for(var i = 0; i < citiesDistance.length; i++) {
-    result = result + citiesDistance[i][0] + ": " +  citiesDistance[i][1] + " km" + "<br />";
-}
-document.getElementById("result").innerHTML = result;
 
+// Creating a new table with row and cell. Saving the first value of the distanceFromPoint array in the first cell and the second value in the second cell.
+// Quelle:https://stackoverflow.com/questions/15164655/generate-html-table-from-2d-javascript-array 
+function createTable(tableData) {
+    var table = document.createElement('table');
+    var row = {};
+    var cell = {};
+  
+    tableData.forEach(function(rowData) {
+      row = table.insertRow();
+      rowData.forEach(function(cellData) {
+        cell = row.insertCell();
+        cell.textContent = cellData;
+      });
+    });
+    document.body.appendChild(table);
+  }
+  
+createTable(distanceFromPoint);
