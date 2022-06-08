@@ -1,0 +1,16 @@
+.card-body{
+    color: rgb(73, 208, 28);
+  }
+  .card-footer{
+    color: rgb(179, 16, 67);
+    text-align: center;
+  }
+  
+  .nav-item:hover {
+    background-color: lightgrey;
+  }
+
+  .navbar{
+      color: rgb(179, 16, 67);
+  }
+  
